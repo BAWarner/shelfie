@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Header extends Component{
     constructor(){
@@ -7,9 +8,20 @@ class Header extends Component{
     }
     render(){
         return(
-            <div>
-                <h1>Header Component</h1>
-            </div>
+            <header>
+                <ul>
+                    <Link
+                        to='/'
+                    >
+                        <li>Dashboard</li>
+                    </Link>
+                    <Link
+                        to='/add'
+                    >
+                        <li>Add New</li>
+                    </Link>
+                </ul>
+            </header>
         );
     }
 }

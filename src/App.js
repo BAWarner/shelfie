@@ -1,36 +1,20 @@
 import React from 'react';
-import axios from 'axios';
-import Dashboard from './Components/Dashboard/Dashboard';
+import './App.scss';
 import Header from './Components/Header/Header';
-import Form from './Components/Form/Form';
+import { HashRouter } from 'react-router-dom';
+import routes from './routes';
 
-class App extends React.Component {
-  // Constructor
-  constructor(){
-    super();
-    this.state = {
-      products: []
-    }
-  }
-  // Lifecycle: Component Did Mount
-  componentDidMount(){
-    // Axios
-    axios
-    .get('/api/products')
-    .then( res => /* Set State */ this.setState( { products: res.data } ) )
-    .catch( err => console.log(err) )
-  }
-  render(){
+
+function App(){
+
     return (
-      <div className="App">
-        <Header />
-        <Dashboard
-          products={this.state.products}
-        />
-        <Form />
-      </div>
+      <HashRouter>
+        <div className="App">
+          <Header />
+          {routes}
+        </div>
+      </HashRouter>
     );
-  }
 }
 
 export default App;
