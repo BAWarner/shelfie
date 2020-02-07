@@ -9,27 +9,29 @@ var controller = require('./controller');
 
 let { SERVER_PORT, CONNECTION_STRING } =  process.env;
 
+// Express: Server Running
 app.listen(SERVER_PORT, () => console.log(`Party on, Wayne!`));
 
 /*******************************************************************/
-
+// REST: Body Parser
 app.use(express.json());
 
+// Massive: Connection
 massive(CONNECTION_STRING)
 .then( db => {
-    app.set('db', db);
-    console.log('Database connection successful');
-} )
-.catch( () => console.log('Looks like you didn\'t connect to the database properly. Try again.') );
-
+        app.set("db", db);
+        console.log('Connection to database successful');
+    } 
+)
+.catch( err => console.log(err) )
 // Import from Controller
 
 var { getProducts, getProduct, createProduct, updateProduct, deleteProduct } = controller;
 
 // End Points
 
-app.get('/api/products', getProducts);          // Read (All)
-app.post('/api/products', createProduct);       // Create
-app.get('/api/products/:id', getProduct);       // Read
-app.put('/api/products/:id', updateProduct);   // Update
-app.delete('/api/products/:id', deleteProduct); // Delete
+app.get('/api/products', getProducts);          // Read (All) REST: Get
+app.post('/api/products', createProduct);       // Create REST: Post
+app.get('/api/products/:id', getProduct);       // Read REST: Get
+app.put('/api/products/:id', updateProduct);    // Update REST: Put
+app.delete('/api/products/:id', deleteProduct); // Delete REST: Delete
